@@ -1,0 +1,43 @@
+{
+  "name": "Solana Trading Bot",
+  "dockerComposeFile": ["../docker-compose.yml", "../docker-compose.dev.yml"],
+  "service": "bot",
+  "workspaceFolder": "/app",
+
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "20" },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+
+  "forwardPorts": [3000, 8081],
+  "portsAttributes": {
+    "8081": { "label": "Redis UI", "onAutoForward": "silent" }
+  },
+
+  "postCreateCommand": "npm ci && cp -n .env.example .env && node -e \"const c=require('crypto'),fs=require('fs');const e=fs.readFileSync('.env','utf8');if(!e.includes('WALLET_ENCRYPTION_SECRET=') || e.includes('change_this')){fs.writeFileSync('.env',e.replace(/WALLET_ENCRYPTION_SECRET=.*/,'WALLET_ENCRYPTION_SECRET='+c.randomBytes(32).toString('hex')));console.log('✔ Generated WALLET_ENCRYPTION_SECRET');}\"",
+
+  "postStartCommand": "echo '\\n\\n✅ Bot dev environment ready!\\n   1. Set TELEGRAM_BOT_TOKEN in .env\\n   2. Run: ./deploy.sh rpc\\n   3. Run: npm run dev\\n'",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-azuretools.vscode-docker",
+        "cweijan.vscode-redis-client",
+        "PKief.material-icon-theme"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "typescript.preferences.importModuleSpecifier": "relative",
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+
+  "remoteEnv": {
+    "NODE_ENV": "development",
+    "LOG_LEVEL": "debug"
+  }
+}

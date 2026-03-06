@@ -1,0 +1,35 @@
+{
+  "name": "solana-tg-trading-bot",
+  "version": "1.0.0",
+  "description": "Modular Telegram trading bot — Solana-first, multi-chain via plugins",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "provision-rpc": "ts-node scripts/provision-rpc.ts",
+    "provision-rpc:helius": "ts-node scripts/provision-rpc.ts --provider helius",
+    "provision-rpc:quicknode": "ts-node scripts/provision-rpc.ts --provider quicknode",
+    "lint": "eslint src/**/*.ts"
+  },
+  "dependencies": {
+    "@solana/web3.js": "^1.91.1",
+    "@solana/spl-token": "^0.4.6",
+    "grammy": "^1.21.1",
+    "grammy-conversations": "^1.2.0",
+    "axios": "^1.6.7",
+    "bs58": "^5.0.0",
+    "dotenv": "^16.4.4",
+    "redis": "^4.6.13",
+    "bignumber.js": "^9.1.2",
+    "node-cron": "^3.0.3",
+    "winston": "^3.11.0",
+    "tweetnacl": "^1.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.20",
+    "@types/node-cron": "^3.0.11",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.3.3"
+  }
+}
