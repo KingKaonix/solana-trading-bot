@@ -55,7 +55,7 @@ async function main() {
 
   // ── Start bot ──────────────────────────────────────────────────────────────
   await bot.start({
-    onStart: (info) => logger.info(`✅ @${info.username} is live — all systems go 🚀`),
+    onStart: (info) => { logger.info(`✅ @${info.username} is live — all systems go 🚀`); },
   });
 }
 

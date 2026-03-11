@@ -103,9 +103,9 @@ export class ReferralService {
     const earnedSol = botFeeSol * REFERRAL_FEE_SHARE;
 
     // Increment earnings atomically
-    await this.redis.incrbyfloat(`referral:earnings:${referrerId}:pending`, earnedSol);
-    await this.redis.incrbyfloat(`referral:earnings:${referrerId}:lifetime`, earnedSol);
-    await this.redis.incrbyfloat(`referral:volume:${referrerId}`, volumeSol);
+    await this.redis.incrByFloat(`referral:earnings:${referrerId}:pending`, earnedSol);
+    await this.redis.incrByFloat(`referral:earnings:${referrerId}:lifetime`, earnedSol);
+    await this.redis.incrByFloat(`referral:volume:${referrerId}`, volumeSol);
 
     logger.info(`[Referral] Credited ${earnedSol.toFixed(6)} SOL to referrer ${referrerId} from trade by ${traderId}`);
     return { referrerId, earnedSol };

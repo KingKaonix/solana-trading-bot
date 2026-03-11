@@ -87,7 +87,7 @@ export class LimitOrderService {
   }
 
   stop(): void {
-    this.job?.destroy();
+    this.job?.stop();
   }
 
   private async checkAll(): Promise<void> {
